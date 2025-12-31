@@ -51,6 +51,7 @@
             <button class="filter-btn" onclick="setFilter('soil', this)">Soil</button>
             <button class="filter-btn" onclick="setFilter('water', this)">Water</button>
             <button class="filter-btn" onclick="setFilter('air', this)">Air / Vapor</button>
+            <button class="filter-btn" onclick="setFilter('sediment', this)">Sediment</button>
         </div>
         
         <table id="dataTable">
@@ -93,15 +94,23 @@
 
             <tr class="item" data-media="soil water air">
                 <td><span class="tag tag-state">Texas</span></td>
-                <td><strong>TCEQ</strong><br><span style="font-size:0.9em; color:#666">Tier 1 PCL Tables</span></td>
+                <td><strong>TCEQ</strong><br><span style="font-size:0.9em; color:#666">Tier 1 PCL Tables (Soil/Water)</span></td>
                 <td><span class="date-badge">Feb 2025</span></td>
                 <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
-                <td><a href="https://www.tceq.texas.gov/remediation/trrp/trrppcls.html" class="btn" target="_blank">Access →</a></td>
+                <td><a href="https://www.tceq.texas.gov/downloads/remediation/trrp/trrp-tier-1-pcl-tables-feb-2025.xlsx" class="btn" target="_blank">Access →</a></td>
+            </tr>
+
+            <tr class="item" data-media="sediment">
+                <td><span class="tag tag-state">Texas</span></td>
+                <td><strong>TCEQ</strong><br><span style="font-size:0.9em; color:#666">Sediment PCL Tables</span></td>
+                <td><span class="date-badge">Aug 2023</span></td>
+                <td><span class="media-badge">Sediment</span></td>
+                <td><a href="https://www.tceq.texas.gov/downloads/remediation/trrp/august-2023-sediment-pcl-tables.xlsx" class="btn" target="_blank">Access →</a></td>
             </tr>
 
             <tr class="item" data-media="soil water air">
                 <td><span class="tag tag-state">California</span></td>
-                <td><strong>Water Boards</strong><br><span style="font-size:0.9em; color:#666">SF Bay ESLs (Screening Levels)</span></td>
+                <td><strong>Water Boards</strong><br><span style="font-size:0.9em; color:#666">SF Bay ESLs (Summary PDF)</span></td>
                 <td><span class="date-badge">Sep 2025</span></td>
                 <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.waterboards.ca.gov/rwqcb2/water_issues/programs/ESL/ESL_Summary_Tables_Rev3.pdf" class="btn" target="_blank">Access →</a></td>
