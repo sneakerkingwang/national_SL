@@ -38,6 +38,9 @@
         .btn:hover { background: #0069d9; }
 
         .hidden { display: none; }
+        
+        /* Highlight style for the automated change */
+        .auto-change { background-color: #fff3cd; padding: 2px 5px; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -569,6 +572,7 @@
     </div>
 
     <script>
+        // --- 1. SEARCH AND FILTER FUNCTIONALITY ---
         let currentCategory = 'all';
 
         function setFilter(category, btn) {
@@ -597,6 +601,36 @@
                 }
             }
         }
+
+        // --- 2. AUTOMATIC TEXT REPLACEMENT (Logic applied on Load) ---
+        window.onload = function() {
+            // Get all rows in the table body
+            let rows = document.querySelectorAll("#dataTable tbody tr");
+
+            rows.forEach(function(row) {
+                // Get the text from the Region Cell (index 0)
+                // We use trim() to remove any accidental whitespace
+                let regionText = row.cells[0].innerText.trim();
+
+                // Get the Agency Cell (index 1) and specifically the bold tag
+                // This ensures we don't delete the subtitle span below it
+                let agencyStrongTag = row.cells[1].querySelector("strong");
+
+                if (agencyStrongTag) {
+                    let agencyText = agencyStrongTag.innerText.trim();
+
+                    // LOGIC: If Region is NOT "USEPA" AND Agency IS "USEPA"
+                    if (regionText !== "USEPA" && agencyText === "USEPA") {
+                        
+                        // Change the text
+                        agencyStrongTag.innerText = "Default to USEPA";
+                        
+                        // Optional: Add a class if you want to highlight the change (defined in CSS above)
+                        // agencyStrongTag.classList.add("auto-change");
+                    }
+                }
+            });
+        };
     </script>
 </body>
 </html>
