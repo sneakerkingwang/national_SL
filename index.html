@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>National Environmental Screening Library</title>
+    <title>National Risk-Based Remediation & Screening Levels</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background: #f4f6f8; margin: 0; padding: 20px; color: #333; }
@@ -42,21 +42,21 @@
 </head>
 <body>
     <div class="container">
-        <h1>National Environmental Screening Library</h1>
-        <p class="subtitle">Real-time directory for EPA & State cleanup standards.</p>
+        <h1>National Risk-Based Remediation & Screening Levels</h1>
+        <p class="subtitle">Centralized directory for current USEPA & State screening levels</p>
         
         <div class="controls">
             <input type="text" id="search" onkeyup="filterData()" placeholder="🔍 Search by State (e.g., Texas), Agency, or Media...">
             <button class="filter-btn active" onclick="setFilter('all', this)">All Media</button>
             <button class="filter-btn" onclick="setFilter('soil', this)">Soil</button>
             <button class="filter-btn" onclick="setFilter('water', this)">Water</button>
-            <button class="filter-btn" onclick="setFilter('air', this)">Air / Vapor</button>
+            <button class="filter-btn" onclick="setFilter('vapor', this)">Vapor</button>
         </div>
         
         <table id="dataTable">
             <thead>
                 <tr>
-                    <th style="width:10%">Region</th>
+                    <th style="width:10%">Region/State</th>
                     <th style="width:35%">Dataset / Agency</th>
                     <th style="width:15%">Published</th>
                     <th style="width:25%">Media Included</th>
@@ -65,19 +65,19 @@
             </thead>
             <tbody>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-nat">USEPA</span></td>
                 <td><strong>USEPA</strong><br><span style="font-size:0.9em; color:#666">Regional Screening Levels (RSLs)</span></td>
                 <td><span class="date-badge">Nov 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Alabama</span></td>
                 <td><strong>USEPA</strong><br><span style="font-size:0.9em; color:#666">Regional Screening Levels (RSLs)</span></td>
                 <td><span class="date-badge">Nov 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" class="btn" target="_blank">Access →</a></td>
             </tr>
 
@@ -111,26 +111,26 @@
                 <td><a href="https://apps.azsos.gov/public_services/Title_18/18-11.pdf" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-             <tr class="item" data-media="soil water air">
+             <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Arkansas</span></td>
                 <td><strong>ARDEQ</strong><br><span style="font-size:0.9em; color:#666">Regional Screening Levels (RSLs)</span></td>
                 <td><span class="date-badge">Nov 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">California</span></td>
                 <td><strong>SF Bay Water Board</strong><br><span style="font-size:0.9em; color:#666">Environmental Screening Levels (ESLs)</span></td>
                 <td><span class="date-badge">Sept 2025</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.waterboards.ca.gov/rwqcb2/water_issues/programs/ESL/ESL_Summary_Tables_Rev3.pdf" class="btn" target="_blank">Access →</a></td>
             </tr>
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">California</span></td>
                 <td><strong>DTSC</strong><br><span style="font-size:0.9em; color:#666">Human Health Risk Assessment (Note 3)</span></td>
                 <td><span class="date-badge">Apr 2025</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://dtsc.ca.gov/wp-content/uploads/sites/31/2022/02/HHRA-Note-3-Tables-Revised-April-2025.xlsx" class="btn" target="_blank">Access →</a></td>
             </tr>
 
@@ -157,107 +157,107 @@
                 <td><a href="https://portal.ct.gov/-/media/deep/water/water_quality_standards/wqs-final-adopted-february-25-2011.pdf" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Delaware</span></td>
                 <td><strong>USEPA</strong><br><span style="font-size:0.9em; color:#666">Regional Screening Levels (RSLs)</span></td>
                 <td><span class="date-badge">Nov 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Florida</span></td>
                 <td><strong>USEPA</strong><br><span style="font-size:0.9em; color:#666">Regional Screening Levels (RSLs)</span></td>
                 <td><span class="date-badge">Nov 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil air">
+            <tr class="item" data-media="soil vapor">
                 <td><span class="tag tag-state">Georgia</span></td>
                 <td><strong>EPD</strong><br><span style="font-size:0.9em; color:#666">Risk Reduction Standards (RRS)</span></td>
                 <td><span class="date-badge">Oct 2018</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://epd.georgia.gov/document/document/type-1-rrs/download" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Hawaii</span></td>
                 <td><strong>HDOH</strong><br><span style="font-size:0.9em; color:#666">Environmental Action Levels (EALs)</span></td>
                 <td><span class="date-badge">Jul 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://health.hawaii.gov/heer/files/2024/07/EALsVol2Appendix1HDOHSpring2024Rev071024.pdf" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Idaho</span></td>
                 <td><strong>USEPA</strong><br><span style="font-size:0.9em; color:#666">Regional Screening Levels (RSLs)</span></td>
                 <td><span class="date-badge">Nov 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Illinois</span></td>
                 <td><strong>USEPA</strong><br><span style="font-size:0.9em; color:#666">Regional Screening Levels (RSLs)</span></td>
                 <td><span class="date-badge">Nov 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Indiana</span></td>
                 <td><strong>IDEM</strong><br><span style="font-size:0.9em; color:#666">Remediation Closure Guide (RCG)</span></td>
                 <td><span class="date-badge">Mar 2025</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.in.gov/idem/cleanups/files/risk-based_closure_table_2025_01.xlsx" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil air">
+            <tr class="item" data-media="soil vapor">
                 <td><span class="tag tag-state">Iowa</span></td>
                 <td><strong>IDNR</strong><br><span style="font-size:0.9em; color:#666">Statewide Standards</span></td>
                 <td><span class="date-badge">Dec 2025</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://programs.iowadnr.gov/riskcalc/Home/statewidestandards" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Kansas</span></td>
                 <td><strong>KDHE</strong><br><span style="font-size:0.9em; color:#666">Risk-Based Standards (RSK)</span></td>
                 <td><span class="date-badge">Jul 2021</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.kdhe.ks.gov/DocumentCenter/View/15467" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Kentucky</span></td>
                 <td><strong>USEPA</strong><br><span style="font-size:0.9em; color:#666">Regional Screening Levels (RSLs)</span></td>
                 <td><span class="date-badge">Nov 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil air">
+            <tr class="item" data-media="soil vapor">
                 <td><span class="tag tag-state">Louisiana</span></td>
                 <td><strong>LDEQ</strong><br><span style="font-size:0.9em; color:#666">RECAP Table 1</span></td>
                 <td><span class="date-badge">Oct 2003</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://deq.louisiana.gov/assets/docs/Land/RECAP/Table1.pdf" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Maine</span></td>
                 <td><strong>MDEP</strong><br><span style="font-size:0.9em; color:#666">Remedial Action Guidelines (RAGs)</span></td>
                 <td><span class="date-badge">Nov 2023</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.maine.gov/dep/spills/publications/guidance/rags/Maine-Remedial-Action-Guidelines-2023-11-15.pdf" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Maryland</span></td>
                 <td><strong>USEPA</strong><br><span style="font-size:0.9em; color:#666">Regional Screening Levels (RSLs)</span></td>
                 <td><span class="date-badge">Nov 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" class="btn" target="_blank">Access →</a></td>
             </tr>
 
@@ -291,51 +291,51 @@
                 <td><span class="media-badge">Water</span></td>
                 <td><a href="https://www.health.state.mn.us/communities/environment/risk/guidance/gw/table.html" class="btn" target="_blank">Access →</a></td>
             </tr>
-            <tr class="item" data-media="air">
+            <tr class="item" data-media="vapor">
                 <td><span class="tag tag-state">Minnesota</span></td>
                 <td><strong>MDH</strong><br><span style="font-size:0.9em; color:#666">Air Values</span></td>
                 <td><span class="date-badge">Dec 2025</span></td>
-                <td><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.health.state.mn.us/communities/environment/risk/guidance/air/table.html" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil air">
+            <tr class="item" data-media="soil vapor">
                 <td><span class="tag tag-state">Mississippi</span></td>
                 <td><strong>MDEQ</strong><br><span style="font-size:0.9em; color:#666">Risk-Based Target Levels</span></td>
                 <td><span class="date-badge">Feb 2002</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.mdeq.ms.gov/wp-content/uploads/2003/09/Proced.pdf" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Missouri</span></td>
                 <td><strong>MDNR</strong><br><span style="font-size:0.9em; color:#666">MRBCA (Risk-Based Corrective Action)</span></td>
                 <td><span class="date-badge">Mar 2005</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://dnr.mo.gov/document-search/missouri-risk-based-corrective-action-mrbca-process-petroleum-storage-tanks-january-2004-modified-march-8-2005" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Montana</span></td>
                 <td><strong>USEPA</strong><br><span style="font-size:0.9em; color:#666">Regional Screening Levels (RSLs)</span></td>
                 <td><span class="date-badge">Nov 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Nebraska</span></td>
                 <td><strong>USEPA</strong><br><span style="font-size:0.9em; color:#666">Regional Screening Levels (RSLs)</span></td>
                 <td><span class="date-badge">Nov 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Nevada</span></td>
                 <td><strong>NDEP</strong><br><span style="font-size:0.9em; color:#666">Basic Comparison Levels (BCLs)</span></td>
                 <td><span class="date-badge">Jul 2025</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://ndep.nv.gov/uploads/documents/ndep-bcls-july-2025.xlsx" class="btn" target="_blank">Access →</a></td>
             </tr>
 
@@ -362,11 +362,11 @@
                 <td><span class="media-badge">Soil</span></td>
                 <td><a href="https://www.env.nm.gov/hazardous-waste/wp-content/uploads/sites/10/2021/12/NMED_SSG-VOL_I_Dec_2_2021.pdf" class="btn" target="_blank">Access →</a></td>
             </tr>
-            <tr class="item" data-media="air">
+            <tr class="item" data-media="vapor">
                 <td><span class="tag tag-state">New Mexico</span></td>
                 <td><strong>NMED</strong><br><span style="font-size:0.9em; color:#666">Vapor Intrusion Screening Levels</span></td>
                 <td><span class="date-badge">Dec 2021</span></td>
-                <td><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.env.nm.gov/hazardous-waste/wp-content/uploads/sites/10/2021/12/NMED_SSG-VOL_I_Dec_2_2021.pdf" class="btn" target="_blank">Access →</a></td>
             </tr>
 
@@ -384,11 +384,11 @@
                 <td><span class="media-badge">Water</span></td>
                 <td><a href="https://govt.westlaw.com/nycrr/Browse/Home/NewYork/UnofficialNewYorkCodesRulesandRegulations?guid=I070d30d0b5a111dda0a4e17826ebc834" class="btn" target="_blank">Access →</a></td>
             </tr>
-            <tr class="item" data-media="air">
+            <tr class="item" data-media="vapor">
                 <td><span class="tag tag-state">New York</span></td>
                 <td><strong>NYSDEC</strong><br><span style="font-size:0.9em; color:#666">Vapor Intrusion</span></td>
                 <td><span class="date-badge">Mar 2023</span></td>
-                <td><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Vapor</span></td>
                 <td><a href="https://govt.westlaw.com/nycrr/Browse/Home/NewYork/UnofficialNewYorkCodesRulesandRegulations?guid=I070d30d0b5a111dda0a4e17826ebc834" class="btn" target="_blank">Access →</a></td>
             </tr>
 
@@ -406,99 +406,99 @@
                 <td><span class="media-badge">Water</span></td>
                 <td><a href="http://deq.nc.gov/about/divisions/water-resources/planning/classification-standards/groundwater-standards" class="btn" target="_blank">Access →</a></td>
             </tr>
-            <tr class="item" data-media="air">
+            <tr class="item" data-media="vapor">
                 <td><span class="tag tag-state">North Carolina</span></td>
                 <td><strong>NCDEQ</strong><br><span style="font-size:0.9em; color:#666">Vapor Intrusion</span></td>
                 <td><span class="date-badge">Feb 2024</span></td>
-                <td><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Vapor</span></td>
                 <td><a href="https://edocs.deq.nc.gov/WasteManagement/Search.aspx?dbid=0&searchcommand={[WM]:[Subdivision]=%22Superfund%22" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">North Dakota</span></td>
                 <td><strong>NDDEQ</strong><br><span style="font-size:0.9em; color:#666">Risk-Based Corrective Action</span></td>
                 <td><span class="date-badge">Dec 2025</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://deq.nd.gov/NDRBCA/" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Ohio</span></td>
                 <td><strong>USEPA</strong><br><span style="font-size:0.9em; color:#666">Regional Screening Levels (RSLs)</span></td>
                 <td><span class="date-badge">Nov 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Oklahoma</span></td>
                 <td><strong>USEPA</strong><br><span style="font-size:0.9em; color:#666">Regional Screening Levels (RSLs)</span></td>
                 <td><span class="date-badge">Nov 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil air">
+            <tr class="item" data-media="soil vapor">
                 <td><span class="tag tag-state">Oregon</span></td>
                 <td><strong>ODEQ</strong><br><span style="font-size:0.9em; color:#666">Risk-Based Concentrations (RBCs)</span></td>
                 <td><span class="date-badge">Aug 2023</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.oregon.gov/deq/filterdocs/rbdmtable.pdf" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Pennsylvania</span></td>
                 <td><strong>PADEP</strong><br><span style="font-size:0.9em; color:#666">Act 2 MSCs (Statewide Health)</span></td>
                 <td><span class="date-badge">Nov 2021</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.pa.gov/agencies/dep/programs-and-services/land/land-recycling-program/standards-guidance-and-procedures/statewide-health-standards" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Rhode Island</span></td>
                 <td><strong>USEPA</strong><br><span style="font-size:0.9em; color:#666">Regional Screening Levels (RSLs)</span></td>
                 <td><span class="date-badge">Nov 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">South Carolina</span></td>
                 <td><strong>USEPA</strong><br><span style="font-size:0.9em; color:#666">Regional Screening Levels (RSLs)</span></td>
                 <td><span class="date-badge">Nov 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">South Dakota</span></td>
                 <td><strong>USEPA</strong><br><span style="font-size:0.9em; color:#666">Regional Screening Levels (RSLs)</span></td>
                 <td><span class="date-badge">Nov 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Tennessee</span></td>
                 <td><strong>USEPA</strong><br><span style="font-size:0.9em; color:#666">Regional Screening Levels (RSLs)</span></td>
                 <td><span class="date-badge">Nov 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Texas</span></td>
                 <td><strong>TCEQ</strong><br><span style="font-size:0.9em; color:#666">Protective Concentration Levels (PCLs)</span></td>
                 <td><span class="date-badge">Feb 2025</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.tceq.texas.gov/downloads/remediation/trrp/trrp-tier-1-pcl-tables-feb-2025.xlsx" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Utah</span></td>
                 <td><strong>USEPA</strong><br><span style="font-size:0.9em; color:#666">Regional Screening Levels (RSLs)</span></td>
                 <td><span class="date-badge">Nov 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" class="btn" target="_blank">Access →</a></td>
             </tr>
 
@@ -517,27 +517,27 @@
                 <td><a href="https://dec.vermont.gov/sites/dec/files/dwgwp/DW/Groundwater%20Protection%20Rule%20and%20Strategy.pdf" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Virginia</span></td>
                 <td><strong>USEPA</strong><br><span style="font-size:0.9em; color:#666">Regional Screening Levels (RSLs)</span></td>
                 <td><span class="date-badge">Nov 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">Washington</span></td>
                 <td><strong>DOE</strong><br><span style="font-size:0.9em; color:#666">MTCA Cleanup Levels (CLARC)</span></td>
                 <td><span class="date-badge">Feb 2025</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://fortress.wa.gov/ecy/ezshare/tcp/CLARC/CLARC_Master.xlsx" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil water air">
+            <tr class="item" data-media="soil water vapor">
                 <td><span class="tag tag-state">West Virginia</span></td>
                 <td><strong>WVDEP</strong><br><span style="font-size:0.9em; color:#666">Voluntary Remediation Program</span></td>
                 <td><span class="date-badge">Dec 2024</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://dep.wv.gov/dlr/oer/technicalguidanceandtemplates/Documents/VRP%20Guidance%20Manual.pdf" class="btn" target="_blank">Access →</a></td>
             </tr>
 
@@ -556,11 +556,11 @@
                 <td><a href="https://www.dhs.wisconsin.gov/water/gws.htm" class="btn" target="_blank">Access →</a></td>
             </tr>
 
-            <tr class="item" data-media="soil air">
+            <tr class="item" data-media="soil vapor">
                 <td><span class="tag tag-state">Wyoming</span></td>
                 <td><strong>WDEQ</strong><br><span style="font-size:0.9em; color:#666">VRP Cleanup Standards</span></td>
                 <td><span class="date-badge">Feb 2023</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Air</span></td>
+                <td><span class="media-badge">Soil</span><span class="media-badge">Vapor</span></td>
                 <td><a href="https://docs.google.com/spreadsheets/d/1FKjRFftI2hngTVL-RtQ4cWV1SojBVxB0/view?rm=demo&gid=1891896140#gid=1891896140" class="btn" target="_blank">Access →</a></td>
             </tr>
 
