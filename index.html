@@ -1,178 +1,745 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>National Environmental Database</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; background: #f4f6f8; margin: 0; padding: 20px; color: #333; }
-        .container { max-width: 1200px; margin: 40px auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        h1 { color: #2c3e50; margin-bottom: 10px; }
-        .subtitle { color: #7f8c8d; margin-bottom: 30px; }
-        
-        /* SEARCH & FILTER BAR */
-        .controls { display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
-        input#search { flex-grow: 1; padding: 12px; border: 2px solid #dfe6e9; border-radius: 8px; font-size: 16px; }
-        
-        .filter-btn { padding: 10px 20px; border: none; background: #dfe6e9; color: #636e72; border-radius: 20px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-        .filter-btn:hover { background: #b2bec3; }
-        .filter-btn.active { background: #0984e3; color: white; }
-
-        /* TABLE STYLES */
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th { text-align: left; padding: 15px; background: #2d3436; color: white; border-radius: 4px 4px 0 0; font-size: 0.95em; }
-        td { padding: 15px; border-bottom: 1px solid #eee; vertical-align: middle; }
-        tr:hover { background-color: #f9f9f9; }
-        
-        /* TAGS & BADGES */
-        .tag { padding: 5px 10px; border-radius: 15px; font-size: 0.75em; font-weight: bold; text-transform: uppercase; margin-right: 5px; display: inline-block; }
-        .tag-nat { background: #e3f2fd; color: #1976d2; }
-        .tag-state { background: #e8f5e9; color: #2e7d32; }
-        
-        .media-badge { font-size: 0.75em; padding: 2px 8px; border-radius: 4px; color: #555; border: 1px solid #ddd; margin-right: 4px; background: #fff; }
-        
-        .date-badge { font-family: monospace; font-size: 0.9em; color: #555; background: #f1f2f6; padding: 4px 8px; border-radius: 4px; }
-        
-        .btn { display: inline-block; padding: 8px 16px; background: #0984e3; color: white; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: 600; transition: background 0.2s; }
-        .btn:hover { background: #0069d9; }
-
-        .hidden { display: none; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>State Environmental Screening Levels</title>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+        vertical-align: top;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+    a {
+        text-decoration: none;
+        color: #007BFF;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    .date-col {
+        white-space: nowrap;
+        color: #666;
+        font-size: 0.9em;
+    }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>National Environmental Screening Library</h1>
-        <p class="subtitle">Real-time directory for EPA & State cleanup standards.</p>
-        
-        <div class="controls">
-            <input type="text" id="search" onkeyup="filterData()" placeholder="🔍 Search by State (e.g., Texas), Agency, or Media...">
-            <button class="filter-btn active" onclick="setFilter('all', this)">All Media</button>
-            <button class="filter-btn" onclick="setFilter('soil', this)">Soil</button>
-            <button class="filter-btn" onclick="setFilter('water', this)">Water</button>
-            <button class="filter-btn" onclick="setFilter('air', this)">Air / Vapor</button>
-            <button class="filter-btn" onclick="setFilter('sediment', this)">Sediment</button>
-        </div>
-        
-        <table id="dataTable">
-            <thead>
-                <tr>
-                    <th style="width:10%">Region</th>
-                    <th style="width:35%">Dataset / Agency</th>
-                    <th style="width:15%">Published</th>
-                    <th style="width:25%">Media Included</th>
-                    <th style="width:15%">Link</th>
-                </tr>
-            </thead>
-            <tbody>
 
-            <tr class="item" data-media="soil water air">
-                <td><span class="tag tag-nat">National</span></td>
-                <td>
-                    <strong>US EPA RSL (Standard)</strong><br>
-                    <span style="font-size:0.9em; color:#666">TR=1E-06, THQ=1.0</span>
-                </td>
-                <td><span class="date-badge">Nov 2024</span></td>
-                <td>
-                    <span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span>
-                </td>
-                <td><a href="https://semspub.epa.gov/src/document/HQ/405298" class="btn" target="_blank">Access →</a></td>
-            </tr>
+<h2>State Environmental Screening Levels</h2>
 
-            <tr class="item" data-media="soil water air">
-                <td><span class="tag tag-nat">National</span></td>
-                <td>
-                    <strong>US EPA RSL (Protective)</strong><br>
-                    <span style="font-size:0.9em; color:#666">TR=1E-06, THQ=0.1</span>
-                </td>
-                <td><span class="date-badge">Nov 2024</span></td>
-                <td>
-                    <span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span>
-                </td>
-                <td><a href="https://semspub.epa.gov/src/document/HQ/405300" class="btn" target="_blank">Access →</a></td>
-            </tr>
+<table>
+    <thead>
+        <tr>
+            <th>State</th>
+            <th>Agency</th>
+            <th>Standard Name</th>
+            <th>All Media Link</th>
+            <th>All Media Date</th>
+            <th>Soil Link</th>
+            <th>Soil Date</th>
+            <th>Groundwater Link</th>
+            <th>Groundwater Date</th>
+            <th>Vapor Intrusion Link</th>
+            <th>Vapor Intrusion Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>USEPA</td>
+            <td>USEPA</td>
+            <td>Regional Screening Levels (RSLs)</td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Alabama</td>
+            <td>USEPA</td>
+            <td>Regional Screening Levels (RSLs)</td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Alaska</td>
+            <td>ADEC</td>
+            <td>Risk Based Screening Levels (RBSLs)</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://dec.alaska.gov/media/7544/20180201_pccr.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">Feb 2018</td>
+            <td><a href="https://dec.alaska.gov/media/7544/20180201_pccr.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">Feb 2018</td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Arizona</td>
+            <td>AZDEQ</td>
+            <td>Soil Remediation Levels (SRLs)</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://apps.azsos.gov/public_services/Title_18/18-07.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">Jun 2025</td>
+            <td><a href="https://static.azdeq.gov/vrp/gpl_guidance.zip" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2020</td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Arkansas</td>
+            <td>ARDEQ</td>
+            <td>Regional Screening Levels (RSLs)</td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>California</td>
+            <td>SF Bay Water Board</td>
+            <td>Environmental Screening Levels (ESLs)</td>
+            <td><a href="https://www.waterboards.ca.gov/rwqcb2/water_issues/programs/ESL/ESL_Summary_Tables_Rev3.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">Sept 2025</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>California</td>
+            <td>DTSC</td>
+            <td>Human Health Risk Assessment (Note 3)</td>
+            <td><a href="https://dtsc.ca.gov/wp-content/uploads/sites/31/2022/02/HHRA-Note-3-Tables-Revised-April-2025.xlsx" target="_blank">View Table</a></td>
+            <td class="date-col">Apr 2025</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Colorado</td>
+            <td>CDPHE</td>
+            <td>Soil Cleanup Table Value Standards</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+            <td><a href="https://cdphe.colorado.gov/water-quality-control-commission-regulations" target="_blank">View Table</a></td>
+            <td class="date-col">May 2024</td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+        </tr>
+        <tr>
+            <td>Connecticut</td>
+            <td>DEEP</td>
+            <td>Remediation Standard Regulations (RSRs)</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://portal.ct.gov/dph/environmental-health/environmental-and-occupational-health-assessment/action-list-for-drinking-water?language=en_US" target="_blank">View Table</a></td>
+            <td class="date-col">Multiple</td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Delaware</td>
+            <td>USEPA</td>
+            <td>Regional Screening Levels (RSLs)</td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Florida</td>
+            <td>USEPA</td>
+            <td>Regional Screening Levels (RSLs)</td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Georgia</td>
+            <td>EPD</td>
+            <td>Risk Reduction Standards (RRS)</td>
+            <td><a href="https://epd.georgia.gov/hazardous-site-response-act-guidance" target="_blank">View Table</a></td>
+            <td class="date-col"></td>
+            <td><a href="https://epd.georgia.gov/document/document/type-1-rrs/download" target="_blank">View Table</a></td>
+            <td class="date-col">Oct 2018</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://epd.georgia.gov/document/document/type-1-rrs/download" target="_blank">View Table</a></td>
+            <td class="date-col">Oct 2018</td>
+        </tr>
+        <tr>
+            <td>Hawaii</td>
+            <td>HDOH</td>
+            <td>Environmental Action Levels (EALs)</td>
+            <td><a href="https://health.hawaii.gov/heer/files/2024/07/EALsVol2Appendix1HDOHSpring2024Rev071024.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">Jul 2024</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Idaho</td>
+            <td>USEPA</td>
+            <td>Regional Screening Levels (RSLs)</td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Illinois</td>
+            <td>USEPA</td>
+            <td>Regional Screening Levels (RSLs)</td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Indiana</td>
+            <td>IDEM</td>
+            <td>Remediation Closure Guide (RCG)</td>
+            <td><a href="https://www.in.gov/idem/cleanups/files/risk-based_closure_table_2025_01.xlsx" target="_blank">View Table</a></td>
+            <td class="date-col">Mar 2025</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Iowa</td>
+            <td>IDNR</td>
+            <td>Statewide Standards</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://programs.iowadnr.gov/riskcalc/Home/statewidestandards" target="_blank">View Table</a></td>
+            <td class="date-col">Dec 2025</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://programs.iowadnr.gov/riskcalc/Home/statewidestandards" target="_blank">View Table</a></td>
+            <td class="date-col">Dec 2025</td>
+        </tr>
+        <tr>
+            <td>Kansas</td>
+            <td>KDHE</td>
+            <td>Risk-Based Standards for Kansas (RSK)</td>
+            <td><a href="https://www.kdhe.ks.gov/DocumentCenter/View/15467" target="_blank">View Table</a></td>
+            <td class="date-col">Jul 2021</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Kentucky</td>
+            <td>USEPA</td>
+            <td>Regional Screening Levels (RSLs)</td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Louisiana</td>
+            <td>LDEQ</td>
+            <td>Risk Evaluation / Corrective Action (RECAP)</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://deq.louisiana.gov/assets/docs/Land/RECAP/Table1.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">Oct 2003</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://deq.louisiana.gov/assets/docs/Land/RECAP/Table1.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">Oct 2003</td>
+        </tr>
+        <tr>
+            <td>Maine</td>
+            <td>MDEP</td>
+            <td>Remedial Action Guidelines (RAGs)</td>
+            <td><a href="https://www.maine.gov/dep/spills/publications/guidance/rags/Maine-Remedial-Action-Guidelines-2023-11-15.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2023</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Maryland</td>
+            <td>USEPA</td>
+            <td>Regional Screening Levels (RSLs)</td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Massachusetts</td>
+            <td>MassDEP</td>
+            <td>Drinking Water Standards</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://www.mass.gov/doc/2020-standards-and-guidelines-for-contaminants-in-massachusetts-drinking-waters/download" target="_blank">View Table</a></td>
+            <td class="date-col">Dec 2020</td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Michigan</td>
+            <td>EGLE</td>
+            <td>Part 201 Cleanup Criteria</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://www.michigan.gov/egle/about/organization/remediation-and-redevelopment/remediation-and-investigation/cleanup-criteria" target="_blank">View Table</a></td>
+            <td class="date-col">Oct 2023</td>
+            <td><a href="https://www.michigan.gov/egle/-/media/Project/Websites/egle/Documents/Programs/RRD/Remediation/Rules---Criteria/Table-1-Groundwater-criteria-xlsx.xlsx?rev=dd8d4a2d753248469bc058cf05a9fb5c&hash=E06737F3322F50BC145CD0CF74DBDB1B" target="_blank">View Table</a></td>
+            <td class="date-col">Oct 2023</td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Minnesota</td>
+            <td>MDH</td>
+            <td>Soil Reference Values (SRVs)</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://www.health.state.mn.us/communities/environment/risk/guidance/gw/table.html" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2025</td>
+            <td><a href="https://www.health.state.mn.us/communities/environment/risk/guidance/air/table.html" target="_blank">View Table</a></td>
+            <td class="date-col">Dec 2025</td>
+        </tr>
+        <tr>
+            <td>Mississippi</td>
+            <td>MDEQ</td>
+            <td>TRP Risk-Based Target Levels</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://www.mdeq.ms.gov/wp-content/uploads/2003/09/Proced.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">Feb 2002</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://www.mdeq.ms.gov/wp-content/uploads/2003/09/Proced.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">Feb 2002</td>
+        </tr>
+        <tr>
+            <td>Missouri</td>
+            <td>MDNR</td>
+            <td>MRBCA</td>
+            <td><a href="https://dnr.mo.gov/document-search/missouri-risk-based-corrective-action-mrbca-process-petroleum-storage-tanks-january-2004-modified-march-8-2005" target="_blank">View Table</a></td>
+            <td class="date-col">Mar 2005</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Montana</td>
+            <td>USEPA</td>
+            <td>Regional Screening Levels (RSLs)</td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Nebraska</td>
+            <td>USEPA</td>
+            <td>Regional Screening Levels (RSLs)</td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Nevada</td>
+            <td>NDEP</td>
+            <td>Basic Comparison Levels (BCLs)</td>
+            <td><a href="https://ndep.nv.gov/uploads/documents/ndep-bcls-july-2025.xlsx" target="_blank">View Table</a></td>
+            <td class="date-col">Jul 2025</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>New Hampshire</td>
+            <td>NHDES</td>
+            <td>Soil Remediation Standards (Env-Or 600)</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://www.des.nh.gov/sites/g/files/ehbemt341/files/documents/2020-01/rcmp-appendix-a-e.pdf#:~:text=The%20preferred%20source%20of%20DRVs%20is%20the" target="_blank">View Table</a></td>
+            <td class="date-col">Jan 2020</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>New Jersey</td>
+            <td>NJDEP</td>
+            <td>Site Remediation Standards (SRS)</td>
+            <td><a href="https://dep.nj.gov/wp-content/uploads/srp/visl_bb_2021.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">May 2021</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>New Mexico</td>
+            <td>NMED</td>
+            <td>SSLs (Soil Screening Levels)</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://www.env.nm.gov/hazardous-waste/wp-content/uploads/sites/10/2021/12/NMED_SSG-VOL_I_Dec_2_2021.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">Dec 2021</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://www.env.nm.gov/hazardous-waste/wp-content/uploads/sites/10/2021/12/NMED_SSG-VOL_I_Dec_2_2021.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">Dec 2021</td>
+        </tr>
+        <tr>
+            <td>New York</td>
+            <td>NYSDEC</td>
+            <td>Part 375 Soil Cleanup Objectives (SCOs)</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://extapps.dec.ny.gov/docs/remediation_hudson_pdf/cpsoil.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">Oct 2010</td>
+            <td><a href="https://govt.westlaw.com/nycrr/Browse/Home/NewYork/UnofficialNewYorkCodesRulesandRegulations?guid=I070d30d0b5a111dda0a4e17826ebc834&originationContext=documenttoc&transitionType=Default&contextData=(sc.Default)" target="_blank">View Table</a></td>
+            <td class="date-col">Mar 2023</td>
+            <td><a href="https://govt.westlaw.com/nycrr/Browse/Home/NewYork/UnofficialNewYorkCodesRulesandRegulations?guid=I070d30d0b5a111dda0a4e17826ebc834&originationContext=documenttoc&transitionType=Default&contextData=(sc.Default)" target="_blank">View Table</a></td>
+            <td class="date-col">Mar 2023</td>
+        </tr>
+        <tr>
+            <td>North Carolina</td>
+            <td>NCDEQ</td>
+            <td>Preliminary Soil Remediation Goals (PSRGs)</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://www.deq.nc.gov//waste-management/dwm/sf/ihs/preliminary-soil-remediation-goals-table-excel-january-2025/open" target="_blank">View Table</a></td>
+            <td class="date-col">Jan 2025</td>
+            <td><a href="http://deq.nc.gov/about/divisions/water-resources/planning/classification-standards/groundwater-standards" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2025</td>
+            <td><a href="https://edocs.deq.nc.gov/WasteManagement/Search.aspx?dbid=0&searchcommand={[WM]:[Subdivision]=%22Superfund%22" target="_blank">View Table</a></td>
+            <td class="date-col">Feb 2024</td>
+        </tr>
+        <tr>
+            <td>North Dakota</td>
+            <td>NDDEQ</td>
+            <td>Risk-Based Corrective Action</td>
+            <td><a href="https://deq.nd.gov/NDRBCA/" target="_blank">View Table</a></td>
+            <td class="date-col">Dec 2025</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Ohio</td>
+            <td>USEPA</td>
+            <td>Regional Screening Levels (RSLs)</td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Oklahoma</td>
+            <td>USEPA</td>
+            <td>Regional Screening Levels (RSLs)</td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Oregon</td>
+            <td>ODEQ</td>
+            <td>Risk-Based Concentrations (RBCs)</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://www.oregon.gov/deq/filterdocs/rbdmtable.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">Aug 2023</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://www.oregon.gov/deq/filterdocs/rbdmtable.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">Aug 2023</td>
+        </tr>
+        <tr>
+            <td>Pennsylvania</td>
+            <td>PADEP</td>
+            <td>Act 2 MSCs (Statewide Health Standards)</td>
+            <td><a href="https://www.pa.gov/agencies/dep/programs-and-services/land/land-recycling-program/standards-guidance-and-procedures/statewide-health-standards" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2021</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Rhode Island</td>
+            <td>USEPA</td>
+            <td>Regional Screening Levels (RSLs)</td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>South Carolina</td>
+            <td>USEPA</td>
+            <td>Regional Screening Levels (RSLs)</td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>South Dakota</td>
+            <td>USEPA</td>
+            <td>Regional Screening Levels (RSLs)</td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Tennessee</td>
+            <td>USEPA</td>
+            <td>Regional Screening Levels (RSLs)</td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Texas</td>
+            <td>TCEQ</td>
+            <td>Protective Concentration Levels (PCLs)</td>
+            <td><a href="https://www.tceq.texas.gov/downloads/remediation/trrp/trrp-tier-1-pcl-tables-feb-2025.xlsx" target="_blank">View Table</a></td>
+            <td class="date-col">Feb 2025</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Utah</td>
+            <td>USEPA</td>
+            <td>Regional Screening Levels (RSLs)</td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Vermont</td>
+            <td>VDEC</td>
+            <td>Soil Screening Values (SSVs)</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://www.healthvermont.gov/sites/default/files/documents/pdf/ENV_ECP_GeneralScreeningValues_Soil.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">Jan 2023</td>
+            <td><a href="https://dec.vermont.gov/sites/dec/files/dwgwp/DW/Groundwater%20Protection%20Rule%20and%20Strategy.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">Jul 2018</td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Virginia</td>
+            <td>USEPA</td>
+            <td>Regional Screening Levels (RSLs)</td>
+            <td><a href="https://www.epa.gov/risk/regional-screening-levels-rsls-generic-tables" target="_blank">View Table</a></td>
+            <td class="date-col">Nov 2024</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Washington</td>
+            <td>DOE</td>
+            <td>MTCA Cleanup Levels (CLARC)</td>
+            <td><a href="https://fortress.wa.gov/ecy/ezshare/tcp/CLARC/CLARC_Master.xlsx" target="_blank">View Table</a></td>
+            <td class="date-col">Feb 2025</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>West Virginia</td>
+            <td>WVDEP</td>
+            <td>Voluntary Remediation Program (De Minimis)</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://dep.wv.gov/dlr/oer/technicalguidanceandtemplates/Documents/VRP%20Guidance%20Manual.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">Dec 2024</td>
+            <td><a href="https://dep.wv.gov/dlr/oer/technicalguidanceandtemplates/Documents/VRP%20Guidance%20Manual.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">Dec 2024</td>
+            <td><a href="https://dep.wv.gov/dlr/oer/technicalguidanceandtemplates/Documents/VRP%20Guidance%20Manual.pdf" target="_blank">View Table</a></td>
+            <td class="date-col">Dec 2024</td>
+        </tr>
+        <tr>
+            <td>Wisconsin</td>
+            <td>DNR</td>
+            <td>Residual Contaminant Levels (RCLs)</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://widnr.widen.net/s/bjqlfvvqlc/0151" target="_blank">View Table</a></td>
+            <td class="date-col">Oct 2024</td>
+            <td><a href="https://www.dhs.wisconsin.gov/water/gws.htm" target="_blank">View Table</a></td>
+            <td class="date-col">Sept 2025</td>
+            <td></td>
+            <td class="date-col"></td>
+        </tr>
+        <tr>
+            <td>Wyoming</td>
+            <td>WDEQ</td>
+            <td>VRP Cleanup Standards</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://docs.google.com/spreadsheets/d/1FKjRFftI2hngTVL-RtQ4cWV1SojBVxB0/view?rm=demo&gid=1891896140#gid=1891896140" target="_blank">View Table</a></td>
+            <td class="date-col">Feb 2023</td>
+            <td></td>
+            <td class="date-col"></td>
+            <td><a href="https://docs.google.com/spreadsheets/d/1FKjRFftI2hngTVL-RtQ4cWV1SojBVxB0/view?rm=demo&gid=1891896140#gid=1891896140" target="_blank">View Table</a></td>
+            <td class="date-col">Feb 2023</td>
+        </tr>
+    </tbody>
+</table>
 
-            <tr class="item" data-media="soil water air">
-                <td><span class="tag tag-state">Texas</span></td>
-                <td><strong>TCEQ</strong><br><span style="font-size:0.9em; color:#666">Tier 1 PCL Tables (Soil/Water)</span></td>
-                <td><span class="date-badge">Feb 2025</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Air</span></td>
-                <td><a href="https://www.tceq.texas.gov/downloads/remediation/trrp/trrp-tier-1-pcl-tables-feb-2025.xlsx" class="btn" target="_blank">Access →</a></td>
-            </tr>
-
-            <tr class="item" data-media="sediment">
-                <td><span class="tag tag-state">Texas</span></td>
-                <td><strong>TCEQ</strong><br><span style="font-size:0.9em; color:#666">Sediment PCL Tables</span></td>
-                <td><span class="date-badge">Aug 2023</span></td>
-                <td><span class="media-badge">Sediment</span></td>
-                <td><a href="https://www.tceq.texas.gov/downloads/remediation/trrp/august-2023-sediment-pcl-tables.xlsx" class="btn" target="_blank">Access →</a></td>
-            </tr>
-
-            <tr class="item" data-media="soil water air">
-                <td><span class="tag tag-state">California</span></td>
-                <td><strong>Water Boards</strong><br><span style="font-size:0.9em; color:#666">SF Bay ESLs (Summary PDF)</span></td>
-                <td><span class="date-badge">Sep 2025</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span><span class="media-badge">Vapor</span></td>
-                <td><a href="https://www.waterboards.ca.gov/rwqcb2/water_issues/programs/ESL/ESL_Summary_Tables_Rev3.pdf" class="btn" target="_blank">Access →</a></td>
-            </tr>
-
-            <tr class="item" data-media="soil">
-                <td><span class="tag tag-state">Florida</span></td>
-                <td><strong>FDEP</strong><br><span style="font-size:0.9em; color:#666">Soil Cleanup Target Levels</span></td>
-                <td><span class="date-badge">Apr 2005</span></td>
-                <td><span class="media-badge">Soil</span></td>
-                <td><a href="https://floridadep.gov/waste/district-business-support/content/soil-cleanup-target-levels" class="btn" target="_blank">Access →</a></td>
-            </tr>
-
-            <tr class="item" data-media="water">
-                <td><span class="tag tag-state">Florida</span></td>
-                <td><strong>FDEP</strong><br><span style="font-size:0.9em; color:#666">Groundwater Target Levels</span></td>
-                <td><span class="date-badge">Apr 2005</span></td>
-                <td><span class="media-badge">Water</span></td>
-                <td><a href="https://floridadep.gov/waste/district-business-support/content/groundwater-cleanup-target-levels" class="btn" target="_blank">Access →</a></td>
-            </tr>
-            
-            <tr class="item" data-media="soil water">
-                <td><span class="tag tag-state">New Jersey</span></td>
-                <td><strong>NJDEP</strong><br><span style="font-size:0.9em; color:#666">Remediation Standards</span></td>
-                <td><span class="date-badge">May 2021</span></td>
-                <td><span class="media-badge">Soil</span><span class="media-badge">Water</span></td>
-                <td><a href="https://www.nj.gov/dep/srp/guidance/rs/" class="btn" target="_blank">Access →</a></td>
-            </tr>
-
-            </tbody>
-        </table>
-    </div>
-
-    <script>
-        let currentCategory = 'all';
-
-        function setFilter(category, btn) {
-            currentCategory = category;
-            let buttons = document.getElementsByClassName("filter-btn");
-            for (let b of buttons) { b.classList.remove("active"); }
-            btn.classList.add("active");
-            filterData();
-        }
-
-        function filterData() {
-            let input = document.getElementById("search").value.toUpperCase();
-            let rows = document.getElementsByClassName("item");
-
-            for (let i = 0; i < rows.length; i++) {
-                let rowText = rows[i].innerText.toUpperCase();
-                let rowMedia = rows[i].getAttribute("data-media");
-                
-                let matchesSearch = rowText.indexOf(input) > -1;
-                let matchesCategory = (currentCategory === 'all') || (rowMedia.includes(currentCategory));
-
-                if (matchesSearch && matchesCategory) {
-                    rows[i].classList.remove("hidden");
-                } else {
-                    rows[i].classList.add("hidden");
-                }
-            }
-        }
-    </script>
 </body>
 </html>
