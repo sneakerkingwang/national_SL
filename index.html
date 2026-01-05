@@ -39,7 +39,6 @@
 
         .hidden { display: none; }
 
-        /* --- NEW CODE ADDED HERE --- */
         /* Style for broken links detected by Python script */
         .btn-broken {
             background: #e74c3c !important; /* Red color */
@@ -49,6 +48,16 @@
         .btn-broken::after {
             content: " (Not Found)";
             font-size: 0.8em;
+        }
+
+        /* --- NEW FOOTER STYLES --- */
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            font-size: 0.85em;
+            color: #95a5a6;
         }
     </style>
 </head>
@@ -556,6 +565,10 @@
 
             </tbody>
         </table>
+
+        <div class="footer">
+            Website last updated: <span id="last-updated-date">Loading...</span>
+        </div>
     </div>
 
     <script>
@@ -589,23 +602,25 @@
             }
         }
 
-        // --- 2. AUTOMATIC TEXT REPLACEMENT (Logic applied on Load) ---
+        // --- 2. AUTOMATIC TEXT REPLACEMENT & FOOTER DATE ---
         window.onload = function() {
-            // Get all rows in the table body
+            // A. Update the Footer Date
+            // This gets the date the file was last modified on the server (GitHub)
+            let dateSpan = document.getElementById('last-updated-date');
+            if (dateSpan) {
+                let date = new Date(document.lastModified);
+                dateSpan.innerText = date.toLocaleString();
+            }
+
+            // B. Run Text Replacement Logic
             let rows = document.querySelectorAll("#dataTable tbody tr");
 
             rows.forEach(function(row) {
-                // Get the text from the Region Cell (index 0)
                 let regionText = row.cells[0].innerText.trim();
-
-                // Get the Agency Cell (index 1) and specifically the bold tag
                 let agencyStrongTag = row.cells[1].querySelector("strong");
 
                 if (agencyStrongTag) {
                     let agencyText = agencyStrongTag.innerText.trim();
-
-                    // LOGIC: If Region is NOT "USEPA" AND Agency IS "USEPA"
-                    // Note: Arkansas was manually changed to "Default to USEPA", so this script won't affect it.
                     if (regionText !== "USEPA" && agencyText === "USEPA") {
                         agencyStrongTag.innerText = "Default to USEPA";
                     }
