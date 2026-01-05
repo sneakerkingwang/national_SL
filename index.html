@@ -38,6 +38,18 @@
         .btn:hover { background: #0069d9; }
 
         .hidden { display: none; }
+
+        /* --- NEW CODE ADDED HERE --- */
+        /* Style for broken links detected by Python script */
+        .btn-broken {
+            background: #e74c3c !important; /* Red color */
+            pointer-events: none; /* Make it unclickable */
+            opacity: 0.7;
+        }
+        .btn-broken::after {
+            content: " (Not Found)";
+            font-size: 0.8em;
+        }
     </style>
 </head>
 <body>
